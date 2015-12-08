@@ -1,3 +1,4 @@
+from logging import debug
 class Hand:
 	def __init__(self):
 		self.cards = []
@@ -13,5 +14,5 @@ class Hand:
 				optCard = card
 		if optCard > 0:
 			self.cards.remove(optCard)
-		#print('M ', mana, ' C ', optCard, ' H ', self.cards)
+		debug('M %d C %d H %s', mana, optCard, str(self.cards))
 		return optCard
