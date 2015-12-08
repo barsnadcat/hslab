@@ -11,9 +11,11 @@ from logging import debug, info
 def Evaluate(d):
 	deck = deepcopy(d)
 	debug(deck.cards)
-	startHand = [deck.TakeRandom() for i in range(3)]
+	secondTurn = randint(0, 1)
+	startHand = [deck.TakeRandom() for i in range(3 + secondTurn)]
 	debug(startHand)
 	hand = Hand()
+	hand.AddCoins(secondTurn)
 	#mooligan
 	for card in startHand:
 		if card > 2:
@@ -49,7 +51,7 @@ if __name__ == '__main__':
 		
 	
 	deck = Deck([max(i % 11, 1) for i in range(30)])
-	res = [Evaluate(deck) for i in range(10000)]
+	res = [Evaluate(deck) for i in range(1000)]
 	m = mean(res)
 	v = sqrt(variance(res, m))
 	info('%f %f %d %d', m, v, min(res), max(res))
