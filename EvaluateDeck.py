@@ -2,8 +2,12 @@ from Deck import Deck
 from Hand import Hand
 
 from random import randint
+from statistics import mean, variance
+from copy import deepcopy
 
-def Evaluate(deck):
+def Evaluate(d):
+	deck = deepcopy(d)
+	#print(deck.cards)
 	startHand = [deck.TakeRandom() for i in range(3)]
 	hand = Hand()
 	#mooligan
@@ -14,7 +18,7 @@ def Evaluate(deck):
 		hand.Add(card)
 	
 	unusedMana = 0
-	for mana in range(1, 11):
+	for mana in range(1, 9):
 		#draw card
 		hand.Add(deck.TakeRandom())
 
@@ -26,5 +30,8 @@ def Evaluate(deck):
 			
 
 if __name__ == '__main__':
-	deck = Deck([randint(1, 10) for i in range(30)])
-	print(Evaluate(deck))
+	deck = Deck([max(i % 11, 1) for i in range(30)])
+	res = [Evaluate(deck) for i in range(10000)]
+	m = mean(res)
+	v = variance(res, m)
+	print(m, ' ', v, ' ', min(res), ' ', max(res))

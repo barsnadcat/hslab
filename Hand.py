@@ -13,4 +13,5 @@ class Hand:
 				optCard = card
 		if optCard > 0:
 			self.cards.remove(optCard)
+		#print('M ', mana, ' C ', optCard, ' H ', self.cards)
 		return optCard
