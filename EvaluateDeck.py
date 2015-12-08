@@ -33,11 +33,18 @@ def Evaluate(d):
 		unusedMana = unusedMana + mana - spentMana
 		
 	return unusedMana
-			
+	
+def EvaluateN(d, n):
+	res = [Evaluate(deck) for i in range(n)]
+	m = mean(res)
+	v = sqrt(variance(res, m))
+	debug('%f %f %d %d', m, v, min(res), max(res))
+	return m
+
 
 if __name__ == '__main__':	
 	logger = logging.getLogger()
-	logger.setLevel(logging.INFO)
+	logger.setLevel(logging.DEBUG)
 
 	# create console handler and set level to debug
 	ch = logging.StreamHandler()
@@ -51,7 +58,4 @@ if __name__ == '__main__':
 		
 	
 	deck = Deck([max(i % 11, 1) for i in range(30)])
-	res = [Evaluate(deck) for i in range(1000)]
-	m = mean(res)
-	v = sqrt(variance(res, m))
-	info('%f %f %d %d', m, v, min(res), max(res))
+	print (EvaluateN(deck, 4))
