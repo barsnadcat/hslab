@@ -35,7 +35,7 @@ def Evaluate(d):
 	return unusedMana
 	
 def EvaluateN(d, n):
-	res = [Evaluate(deck) for i in range(n)]
+	res = [Evaluate(d) for i in range(n)]
 	m = mean(res)
 	v = sqrt(variance(res, m))
 	debug('%f %f %d %d', m, v, min(res), max(res))
