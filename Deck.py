@@ -8,7 +8,7 @@ class Deck:
 		self.cards.append(card)
 		
 	def TakeRandom(self):
-		assert len(self.cards) > 0
+		#assert len(self.cards) > 0
 		return self.cards.pop(randint(0, len(self.cards) - 1))
 
 		

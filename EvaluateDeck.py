@@ -4,16 +4,16 @@ from Hand import Hand
 from random import randint
 from statistics import mean, variance
 from math import sqrt
-from copy import deepcopy
+from copy import copy
 import logging
 from logging import debug, info
 
 def Evaluate(d):
-	deck = deepcopy(d)
-	debug(deck.cards)
+	deck = Deck(copy(d.cards))
+	#debug(deck.cards)
 	secondTurn = randint(0, 1)
 	startHand = [deck.TakeRandom() for i in range(3 + secondTurn)]
-	debug(startHand)
+	#debug(startHand)
 	hand = Hand()
 	hand.AddCoins(secondTurn)
 	#mooligan
@@ -24,7 +24,7 @@ def Evaluate(d):
 		hand.Add(card)
 	
 	unusedMana = 0
-	for mana in range(1, 9):
+	for mana in range(1, 8):
 		#draw card
 		hand.Add(deck.TakeRandom())
 
@@ -37,8 +37,8 @@ def Evaluate(d):
 def EvaluateN(d, n):
 	res = [Evaluate(d) for i in range(n)]
 	m = mean(res)
-	v = sqrt(variance(res, m))
-	debug('%f %f %d %d', m, v, min(res), max(res))
+	#v = sqrt(variance(res, m))
+	#debug('%f %f %d %d', m, v, min(res), max(res))
 	return m
 
 
