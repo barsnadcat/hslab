@@ -23,16 +23,17 @@ def Evaluate(d):
 			card = deck.TakeRandom()
 		hand.Add(card)
 	
-	unusedMana = 0
-	for mana in range(1, 8):
+	totalTempo = 0
+	tableTempo = 0
+	for mana in range(1, 9):
+		totalTempo += tableTempo
 		#draw card
 		hand.Add(deck.TakeRandom())
 
 		#play max aviable card
-		spentMana = hand.Play(mana)
-		unusedMana = unusedMana + mana - spentMana
+		tableTempo += hand.Play(mana)
 		
-	return unusedMana
+	return totalTempo
 	
 def EvaluateN(d, n):
 	res = [Evaluate(d) for i in range(n)]

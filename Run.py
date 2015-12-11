@@ -4,12 +4,12 @@ from EvaluateDeck import EvaluateN
 from random import randint
 from random import random as rand
 
-populationSize = 500
-evaluationIteration = 5000
+populationSize = 250
+evaluationIteration = 2000
 geneMax = 63
 cardCostMax = 7
-tournamentSize = 3
-mutationChance = 0.1
+tournamentSize = 5
+mutationChance = 0.05
 mutationDelta = 3
 generationsLimit = 100
 
@@ -42,14 +42,14 @@ def Generation(population):
 		p.fitness = EvaluateN(p.GetDeck(), evaluationIteration)
 
 		if bestInGeneration:
-			if p.fitness < bestInGeneration.fitness:
+			if p.fitness > bestInGeneration.fitness:
 				bestInGeneration = p
 		else:
 			bestInGeneration = p
 
 
 		if best:
-			if p.fitness < best.fitness:
+			if p.fitness > best.fitness:
 				best = p
 		else:
 			best = p

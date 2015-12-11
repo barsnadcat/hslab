@@ -20,4 +20,4 @@ class Hand:
 			self.coins = self.coins - max(optCard - mana, 0)
 			self.cards.remove(optCard)
 		#debug('M %d C %d H %s %d', mana, optCard, str(self.cards), self.coins)
-		return min(optCard, mana)
+		return optCard
