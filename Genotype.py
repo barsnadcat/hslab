@@ -1,5 +1,6 @@
 from random import randint
 from Deck import Deck
+from Curve import Curve
 
 class Genotype:
 	def __init__(self, g):
@@ -22,15 +23,11 @@ class Genotype:
 			index = diff.index(max(diff))
 			normalized[index] += 1
 			ns = sum(normalized)
-		
-		#convert to deck format
-		cards = []
-		for manaCost in range(len(normalized)):
-			count = normalized[manaCost]
-			for i in range(count):
-				cards.append(manaCost + 1)
-		
-		return Deck(cards)
+
+
+		curve = Curve(normalized)
+				
+		return curve.GetDeck()
 		
 		
 if __name__ == '__main__':
