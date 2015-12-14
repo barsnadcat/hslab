@@ -1,6 +1,6 @@
 from Genotype import Genotype
 from Curve import Curve
-from EvaluateDeck import EvaluateN
+from Evaluate import EvaluateN
 from random import randint
 from random import random as rand
 
