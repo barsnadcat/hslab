@@ -1,4 +1,5 @@
 from Curve import Curve
+from Fitness import Fitness
 from Hand import Hand
 
 from random import randint
@@ -35,8 +36,8 @@ def Evaluate(curve):
 def EvaluateN(curve, n):
 	res = [Evaluate(curve) for i in range(n)]
 	m = mean(res)
-	#v = sqrt(variance(res, m))
-	return m
+	v = sqrt(variance(res, m))
+	return Fitness(m, v)
 
 
 if __name__ == '__main__':
