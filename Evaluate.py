@@ -7,7 +7,7 @@ from statistics import mean, variance
 from math import sqrt
 from copy import copy
 
-def Evaluate(curve):
+def Evaluate(curve, turns):
 	deck = curve.GetDeck()
 	secondTurn = randint(0, 1)
 	startHand = [deck.TakeRandom() for i in range(3 + secondTurn)]
@@ -23,9 +23,9 @@ def Evaluate(curve):
 	
 	totalTempo = 0
 	tableTempo = 0
-	for mana in range(1, 9):
+	for mana in range(1, turns + 1):
 		totalTempo += tableTempo
-		#draw card
+		#draw cardr
 		hand.Add(deck.TakeRandom())
 
 		#play max aviable card
@@ -33,13 +33,15 @@ def Evaluate(curve):
 		
 	return totalTempo
 	
-def EvaluateN(curve, n):
-	res = [Evaluate(curve) for i in range(n)]
+def EvaluateN(curve, n, t):
+	res = [Evaluate(curve, t) for i in range(n)]
 	m = mean(res)
 	v = sqrt(variance(res, m))
 	return Fitness(m, v)
 
 
 if __name__ == '__main__':
-	curve = Curve([2, 7, 7, 5, 5, 3, 1])
-	print (EvaluateN(curve, 4))
+	
+	print (EvaluateN(Curve([2, 7, 7, 5, 5, 3, 1]), 20000, 8))
+	print (EvaluateN(Curve([2, 6, 7, 6, 4, 4, 1]), 20000, 8))
+

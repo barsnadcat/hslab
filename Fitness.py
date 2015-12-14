@@ -4,7 +4,7 @@ class Fitness:
 		self.stdev = v
 
 	def __gt__(self, other):
-		return self.mean > other.mean
+		return (self.mean - self.stdev) > (other.mean - other.stdev)
 
 	def __str__(self):
 		return str(self.mean) + " +/- " + str(self.stdev)
