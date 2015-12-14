@@ -1,7 +1,5 @@
 from random import randint
 from Deck import Deck
-import logging
-from logging import debug
 
 class Genotype:
 	def __init__(self, g):
@@ -9,7 +7,6 @@ class Genotype:
 		
 	def GetDeck(self):
 		gs = sum(self.genes)
-		debug(self.genes)
 		
 		#all are 0 - it is simplier to return predefined deck
 		if gs == 0:		
@@ -25,8 +22,6 @@ class Genotype:
 			index = diff.index(max(diff))
 			normalized[index] += 1
 			ns = sum(normalized)
-			debug(normalized)
-			debug(ns)
 		
 		#convert to deck format
 		cards = []
@@ -40,19 +35,7 @@ class Genotype:
 		
 if __name__ == '__main__':
 
-	logger = logging.getLogger()
-	logger.setLevel(logging.DEBUG)
-
-	# create console handler and set level to debug
-	ch = logging.StreamHandler()
-	ch.setLevel(logging.DEBUG)
-	# create formatter
-	formatter = logging.Formatter('%(message)s')
-	# add formatter to ch
-	ch.setFormatter(formatter)
-	# add ch to logger
-	logger.addHandler(ch)
-
 	g = Genotype([randint(0, 31) for i in range(9)])
 	d = g.GetDeck()
+	print(d)
 	
