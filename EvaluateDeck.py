@@ -1,4 +1,4 @@
-from Deck import Deck
+from Curve import Curve
 from Hand import Hand
 
 from random import randint
@@ -6,8 +6,8 @@ from statistics import mean, variance
 from math import sqrt
 from copy import copy
 
-def Evaluate(d):
-	deck = Deck(copy(d.cards))
+def Evaluate(curve):
+	deck = curve.GetDeck()
 	secondTurn = randint(0, 1)
 	startHand = [deck.TakeRandom() for i in range(3 + secondTurn)]
 	hand = Hand()
@@ -20,24 +20,25 @@ def Evaluate(d):
 			card = deck.TakeRandom()
 		hand.Add(card)
 	
-	unusedMana = 0
-	for mana in range(1, 8):
+	totalTempo = 0
+	tableTempo = 0
+	for mana in range(1, 9):
+		totalTempo += tableTempo
 		#draw card
 		hand.Add(deck.TakeRandom())
 
 		#play max aviable card
-		spentMana = hand.Play(mana)
-		unusedMana = unusedMana + mana - spentMana
+		tableTempo += hand.Play(mana)
 		
-	return unusedMana
+	return totalTempo
 	
-def EvaluateN(d, n):
-	res = [Evaluate(d) for i in range(n)]
+def EvaluateN(curve, n):
+	res = [Evaluate(curve) for i in range(n)]
 	m = mean(res)
 	#v = sqrt(variance(res, m))
 	return m
 
 
 if __name__ == '__main__':
-	deck = Deck([max(i % 11, 1) for i in range(30)])
-	print (EvaluateN(deck, 4))
+	curve = Curve([2, 7, 7, 5, 5, 3, 1])
+	print (EvaluateN(curve, 4))

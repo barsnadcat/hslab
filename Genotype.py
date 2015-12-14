@@ -6,7 +6,7 @@ class Genotype:
 	def __init__(self, g):
 		self.genes = g
 		
-	def GetDeck(self):
+	def GetCurve(self):
 		gs = sum(self.genes)
 		
 		#all are 0 - it is simplier to return predefined deck
@@ -23,16 +23,13 @@ class Genotype:
 			index = diff.index(max(diff))
 			normalized[index] += 1
 			ns = sum(normalized)
-
-
-		curve = Curve(normalized)
 				
-		return curve.GetDeck()
+		return Curve(normalized)
 		
 		
 if __name__ == '__main__':
 
 	g = Genotype([randint(0, 31) for i in range(9)])
-	d = g.GetDeck()
-	print(d)
+	c = g.GetCurve()
+	print(c)
 	

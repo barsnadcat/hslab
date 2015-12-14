@@ -6,7 +6,7 @@ class Curve:
 		self.costs = c
 
 	def __str__(self):
-		return str(self.costs)
+		return str(self.costs) + ' ' + str(sum(self.costs))
 
 	def GetDeck(self):
 		cards = []

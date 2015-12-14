@@ -1,17 +1,17 @@
-from Deck import Deck
 from Genotype import Genotype
+from Curve import Curve
 from EvaluateDeck import EvaluateN
 from random import randint
 from random import random as rand
 
-populationSize = 500
-evaluationIteration = 5000
+populationSize = 100
+evaluationIteration = 500
 geneMax = 63
 cardCostMax = 7
-tournamentSize = 3
-mutationChance = 0.1
+tournamentSize = 4
+mutationChance = 0.05
 mutationDelta = 3
-generationsLimit = 100
+generationsLimit = 10
 
 
 def Crossover(father, mother):
@@ -39,17 +39,17 @@ def Generation(population):
 	bestInGeneration = None
 	for i in range(len(population)):
 		p = population[i]
-		p.fitness = EvaluateN(p.GetDeck(), evaluationIteration)
+		p.fitness = EvaluateN(p.GetCurve(), evaluationIteration)
 
 		if bestInGeneration:
-			if p.fitness < bestInGeneration.fitness:
+			if p.fitness > bestInGeneration.fitness:
 				bestInGeneration = p
 		else:
 			bestInGeneration = p
 
 
 		if best:
-			if p.fitness < best.fitness:
+			if p.fitness > best.fitness:
 				best = p
 		else:
 			best = p
@@ -59,7 +59,7 @@ def Generation(population):
 			survivors.append(best)
 			best = None
 	
-	print('Best in generation ', bestInGeneration.fitness, ' ', bestInGeneration.GetDeck().cards)
+	print('Best in generation ', bestInGeneration.fitness, ' ', bestInGeneration.GetCurve())
 
 	survived = len(survivors)
 	
