@@ -1,4 +1,5 @@
 from random import randint
+from Hand import Hand
 
 class Deck:
 	def __init__(self, cards):
@@ -11,7 +12,22 @@ class Deck:
 		self.cards.append(card)
 		
 	def TakeRandom(self):
-		#assert len(self.cards) > 0
-		return self.cards.pop(randint(0, len(self.cards) - 1))
+		if self.cards:
+			return self.cards.pop(randint(0, len(self.cards) - 1))
+		else:
+			return None
+			
+	def GetHand(self, startCardsCount):
+		startHand = [self.TakeRandom() for i in range(startCardsCount)]
+		#mooligan
+		hand = Hand()
+		for card in startHand:
+			if card > 2:
+				self.Add(card)
+				card = self.TakeRandom()
+			hand.Add(card)
+			
+		return hand
+
 
 		

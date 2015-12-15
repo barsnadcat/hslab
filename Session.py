@@ -26,11 +26,8 @@ def Session(deckA, deckB):
 	if randint(0, 1):
 		fdeck, sdeck = sdeck, fdeck
 		
-	fhand = Hand()
-	shand = Hand()
-
-	fhand.Mooligan(3, fdeck)	
-	shand.Mooligan(4, sdeck)
+	fhand = fdeck.GetHand(3)
+	shand = sdeck.GetHand(4)
 	shand.AddCoins(1)
 	
 	fboard = Board()

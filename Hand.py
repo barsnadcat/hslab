@@ -1,8 +1,7 @@
 from logging import debug
-from Deck import Deck
+
 class Hand:
-	def __init__(self, d):
-		self.deck = d
+	def __init__(self):
 		self.cards = []
 		self.coins = 0
 		
@@ -14,6 +13,7 @@ class Hand:
 			self.cards.append(card)
 
 	def Play(self, mana):
+		#Play opt card
 		optCard = 0
 		for card in self.cards:
 			if card <= mana + self.coins and card > optCard:
@@ -22,17 +22,6 @@ class Hand:
 			self.coins = self.coins - max(optCard - mana, 0)
 			self.cards.remove(optCard)
 		
+		#TODO we need to play more cards if mana allows!
 		return optCard
-		
-	def Draw(self):
-		self.Add(self.deck.TakeRandom())
-		
-	def Mooligan(self, startCardsCount):
-		startHand = [self.deck.TakeRandom() for i in range(startCardsCount)]
-		
-		for card in startHand:
-			if card > 2:
-				self.deck.Add(card)
-				card = self.deck.TakeRandom()
-			self.Add(card)
-	
+			
