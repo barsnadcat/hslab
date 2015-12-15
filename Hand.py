@@ -1,11 +1,13 @@
 from logging import debug
+from Deck import Deck
 class Hand:
-	def __init__(self):
+	def __init__(self, d):
+		self.deck = d
 		self.cards = []
 		self.coins = 0
 		
 	def AddCoins(self, c):
-		self.coins = self.coins + c
+		self.coins += c
 		
 	def Add(self, card):
 		if len(self.cards) + self.coins < 10:
@@ -21,3 +23,16 @@ class Hand:
 			self.cards.remove(optCard)
 		
 		return optCard
+		
+	def Draw(self):
+		self.Add(self.deck.TakeRandom())
+		
+	def Mooligan(self, startCardsCount):
+		startHand = [self.deck.TakeRandom() for i in range(startCardsCount)]
+		
+		for card in startHand:
+			if card > 2:
+				self.deck.Add(card)
+				card = self.deck.TakeRandom()
+			self.Add(card)
+	
