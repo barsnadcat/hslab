@@ -3,6 +3,9 @@ from random import randint
 class Deck:
 	def __init__(self, cards):
 		self.cards = cards
+
+	def __str__(self):
+		return str(self.cards)
 		
 	def Add(self, card):
 		self.cards.append(card)

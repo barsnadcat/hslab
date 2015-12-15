@@ -1,16 +1,17 @@
-from Deck import Deck
 from Genotype import Genotype
-from EvaluateDeck import EvaluateN
+from Curve import Curve
+from Evaluate import EvaluateN
 from random import randint
 from random import random as rand
 
-populationSize = 250
-evaluationIteration = 2000
+populationSize = 500
+evaluationIteration = 20000
 geneMax = 63
 cardCostMax = 7
-tournamentSize = 5
+turns = 8
+tournamentSize = 4
 mutationChance = 0.05
-mutationDelta = 3
+mutationDelta = 10
 generationsLimit = 100
 
 
@@ -39,7 +40,7 @@ def Generation(population):
 	bestInGeneration = None
 	for i in range(len(population)):
 		p = population[i]
-		p.fitness = EvaluateN(p.GetDeck(), evaluationIteration)
+		p.fitness = EvaluateN(p.GetCurve(), evaluationIteration, turns)
 
 		if bestInGeneration:
 			if p.fitness > bestInGeneration.fitness:
@@ -55,11 +56,11 @@ def Generation(population):
 			best = p
 	
 		if i % tournamentSize == 0:
-			print('Selected ', best.fitness)
+			print('Selected ', best.fitness, best.GetCurve())
 			survivors.append(best)
 			best = None
 	
-	print('Best in generation ', bestInGeneration.fitness, ' ', bestInGeneration.GetDeck().cards)
+	print('Best in generation ', bestInGeneration.fitness, ' ', bestInGeneration.GetCurve())
 
 	survived = len(survivors)
 	
