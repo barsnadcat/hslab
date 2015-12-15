@@ -14,8 +14,8 @@ def Turn(mana, myBoard, enemyBoard, hand, deck):
 	else:
 		hand.Add(card)
 	
-	optCard = hand.Play(mana)
-	myBoard.AddCreatures([Creature(optCard, optCard)])
+	cards = hand.Play(mana)
+	myBoard.AddCreatures([Creature(c, c) for c in cards])
 	myBoard.Attack(enemyBoard)
 	
 

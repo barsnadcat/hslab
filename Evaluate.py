@@ -21,7 +21,7 @@ def Evaluate(curve, turns):
 		hand.Add(card)
 		
 		#play max aviable card
-		tableTempo += hand.Play(mana)
+		tableTempo += sum(hand.Play(mana))
 		totalTempo += tableTempo
 		
 	return totalTempo

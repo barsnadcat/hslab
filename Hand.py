@@ -1,4 +1,3 @@
-from logging import debug
 
 class Hand:
 	def __init__(self):
@@ -23,5 +22,5 @@ class Hand:
 			self.cards.remove(optCard)
 		
 		#TODO we need to play more cards if mana allows!
-		return optCard
+		return [optCard]
 			
