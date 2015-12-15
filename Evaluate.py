@@ -37,5 +37,6 @@ if __name__ == '__main__':
 	print (EvaluateN(Curve([2, 8, 7, 6, 4, 2, 1]), 100000, 7))
 	print (EvaluateN(Curve([2, 7, 7, 5, 5, 3, 1]), 100000, 7))	
 	print (EvaluateN(Curve([2, 7, 7, 6, 4, 3, 1]), 100000, 7))
+	print (EvaluateN(Curve([4, 9, 9, 5, 2, 1, 0]), 100000, 7))
 
 	
