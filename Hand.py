@@ -1,3 +1,4 @@
+from SubsetSumSolver import ApproximateSubsetSum
 
 class Hand:
 	def __init__(self):
@@ -12,15 +13,17 @@ class Hand:
 			self.cards.append(card)
 
 	def Play(self, mana):
-		#Play opt card
-		optCard = 0
-		for card in self.cards:
-			if card <= mana + self.coins and card > optCard:
-				optCard = card
-		if optCard > 0:
-			self.coins = self.coins - max(optCard - mana, 0)
-			self.cards.remove(optCard)
-		
-		#TODO we need to play more cards if mana allows!
-		return [optCard]
-			
+		if self.coins:
+			s = mana + self.coins
+			usedMana, cards = ApproximateSubsetSum(self.cards, s)
+			if usedMana == s:
+				self.coins = 0
+				for card in cards:
+					self.cards.remove(card)
+				return cards
+				
+		usedMana, cards = ApproximateSubsetSum(self.cards, mana)		
+		for card in cards:
+			self.cards.remove(card)
+		return cards
+

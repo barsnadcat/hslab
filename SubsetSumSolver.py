@@ -5,7 +5,7 @@ http://en.wikipedia.org/wiki/Subset_sum_problem#Polynomial_time_approximate_algo
 
 import operator
 
-def approx_with_accounting_and_duplicates(x_list, s):
+def ApproximateSubsetSum(x_list, s):
     '''
     Modified from http://en.wikipedia.org/wiki/Subset_sum_problem#Polynomial_time_approximate_algorithm
          initialize a list S to contain one element 0.
