@@ -41,7 +41,7 @@ def EvaluateN(curve, n, t):
 
 
 if __name__ == '__main__':
-	
-	print (EvaluateN(Curve([2, 7, 7, 5, 5, 3, 1]), 20000, 8))
-	print (EvaluateN(Curve([2, 6, 7, 6, 4, 4, 1]), 20000, 8))
+	print (EvaluateN(Curve([2, 6, 7, 6, 4, 4, 1]), 100000, 8))
+	print (EvaluateN(Curve([2, 7, 7, 5, 5, 3, 1]), 100000, 8))	
+	print (EvaluateN(Curve([2, 7, 7, 6, 4, 3, 1]), 100000, 8))
 

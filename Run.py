@@ -11,7 +11,7 @@ cardCostMax = 7
 turns = 8
 tournamentSize = 4
 mutationChance = 0.05
-mutationDelta = 3
+mutationDelta = 10
 generationsLimit = 100
 
 
@@ -56,7 +56,7 @@ def Generation(population):
 			best = p
 	
 		if i % tournamentSize == 0:
-			print('Selected ', best.fitness)
+			print('Selected ', best.fitness, best.GetCurve())
 			survivors.append(best)
 			best = None
 	
