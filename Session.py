@@ -13,10 +13,10 @@ def Turn(mana, myBoard, enemyBoard, hand, deck):
 			return
 	else:
 		hand.Add(card)
-	
+
+	myBoard.Attack(enemyBoard)	
 	cards = hand.Play(mana)
 	myBoard.AddCreatures([Creature(c, c) for c in cards])
-	myBoard.Attack(enemyBoard)
 	
 
 def Session(deckA, deckB):
@@ -38,15 +38,30 @@ def Session(deckA, deckB):
 		mana += 1
 		if mana > 10:
 			mana = 10
+		print("*** ", mana, " ***")
+
 			
 		Turn(mana, fboard, sboard, fhand, fdeck)
+
+		print(fhand)
+		print(fboard)
+		print(sboard)
+		print(shand)
+
 
 		if fboard.IsDead():
 			return 0
 		if sboard.IsDead():
 			return 1
 
+		print("--------")
+
 		Turn(mana, sboard, fboard, shand, sdeck)
+
+		print(fhand)
+		print(fboard)
+		print(sboard)
+		print(shand)
 
 		if fboard.IsDead():
 			return 0

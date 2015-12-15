@@ -4,8 +4,8 @@ from Evaluate import EvaluateN
 from random import randint
 from random import random as rand
 
-populationSize = 500
-evaluationIteration = 20000
+populationSize = 300
+evaluationIteration = 3000
 geneMax = 63
 cardCostMax = 7
 turns = 7

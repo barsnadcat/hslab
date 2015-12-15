@@ -4,6 +4,12 @@ class Hand:
 	def __init__(self):
 		self.cards = []
 		self.coins = 0
+
+	def __str__(self):
+		c = ""
+		if self.coins:
+			c = " 0"
+		return str(self.cards) + c
 		
 	def AddCoins(self, c):
 		self.coins += c

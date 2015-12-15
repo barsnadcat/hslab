@@ -3,6 +3,13 @@ class Board:
 		self.creatures = []
 		self.health = 30
 		self.overdraw = 0
+
+	def __str__(self):
+		crt = " "
+		for c in self.creatures:
+			crt += str(c) + " "
+		return str(self.health) + crt
+
 		
 	def AddCreatures(self, cs):
 		self.creatures.extend(cs)
