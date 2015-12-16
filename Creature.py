@@ -5,3 +5,7 @@ class Creature:
 
 	def __str__(self):
 		return str(self.attack) + "/" + str(self.health)
+
+	def Melee(self, enemy):
+		self.health -= enemy.attack
+		enemy.health -= self.attack
