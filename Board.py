@@ -1,8 +1,8 @@
 from Creature import Creature
 
 class Board:
-	def __init__(self):
-		self.creatures = []
+	def __init__(self, c=[]):
+		self.creatures = c
 		self.health = 30
 		self.overdraw = 0
 
@@ -13,8 +13,11 @@ class Board:
 		return str(self.health) + crt
 
 		
-	def AddCreatures(self, cs):
-		self.creatures.extend(cs)
+	def AddCreature(self, c):
+		if len(self.creatures) < 7:
+			self.creatures.append(c)
+			return True
+		return False
 		
 	def Attack(self, enemy):
 		#Check if lethal
@@ -26,8 +29,8 @@ class Board:
 				return
 
 		#Trade up, trade 2 for 1, in other case - face
-		myCreatures = SortMyCreatures(self.creatures)
-		enemyCreatures = SortEnemyCreatures(enemy.creatures)
+		myCreatures = SortedCreatures(self.creatures, False)
+		enemyCreatures = SortedCreatures(enemy.creatures, True)
 
 		myAliveCreatures = []
 		for mc in myCreatures:
@@ -61,53 +64,37 @@ class Board:
 		self.heath -= self.overdraw
 		
 
-def SortEnemyCreatures(creatures):
-	res = sorted(creatures, key=lambda c: 10 - c.health)
-	res.sort(key=lambda c: 10 - c.attack)
-	return res
-
-def SortMyCreatures(creatures):
-	res = sorted(creatures, key=lambda c: c.health)
-	res.sort(key=lambda c: c.attack)
+def SortedCreatures(creatures, r):
+	res = sorted(creatures, key=lambda c: c.health, reverse=r)
+	res.sort(key=lambda c: c.attack, reverse=r)
 	return res
 
 
-#TODO limit board space
 
 if __name__ == '__main__':
-	a = Board()
-	b = Board()
-	a.AddCreatures([Creature(5, 2)])
-	b.AddCreatures([Creature(2, 2), Creature(2, 1)])
+	a = Board([Creature(5, 2)])
+	b = Board([Creature(2, 2), Creature(2, 1)])
 	b.Attack(a)
 	assert(b.creatures[0].health == 2)
 
-	a = Board()
-	b = Board()
-	a.AddCreatures([Creature(5, 2)])
-	b.AddCreatures([Creature(3, 2), Creature(2, 2)])
+	a = Board([Creature(5, 2)])
+	b = Board([Creature(3, 2), Creature(2, 2)])
 	b.Attack(a)
 	assert(b.creatures[0].attack == 3)
 
-	a = Board()
-	b = Board()
-	a.AddCreatures([Creature(5, 1), Creature(5, 2)])
-	b.AddCreatures([Creature(2, 2)])
+	a = Board([Creature(5, 1), Creature(5, 2)])
+	b = Board([Creature(2, 2)])
 	b.Attack(a)
 	assert(a.creatures[0].health == 1)
 
-	a = Board()
-	b = Board()
-	a.AddCreatures([Creature(5, 1), Creature(2, 2)])
-	b.AddCreatures([Creature(6, 6)])
+	a = Board([Creature(5, 1), Creature(2, 2)])
+	b = Board([Creature(6, 6)])
 	b.Attack(a)
 	assert(a.creatures[0].attack == 2)
 
-	a = Board()
-	b = Board()
-	a.AddCreatures([Creature(5, 1)])
+	a = Board([Creature(5, 1)])
+	b = Board([Creature(6, 6)])
 	a.health = 6
-	b.AddCreatures([Creature(6, 6)])
 	b.Attack(a)
 	assert(a.health == 0)
 

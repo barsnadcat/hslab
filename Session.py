@@ -15,8 +15,18 @@ def Turn(mana, myBoard, enemyBoard, hand, deck):
 		hand.Add(card)
 
 	myBoard.Attack(enemyBoard)	
+	
+	if enemyBoard.IsDead():
+		return
+
 	cards = hand.Play(mana)
-	myBoard.AddCreatures([Creature(c, c) for c in cards])
+
+	#Creatures my not fit into the board, play heaviest first
+	cards.sort(reverse=True)
+	for c in cards:
+		if not myBoard.AddCreature(Creature(c, c)):
+			hand.Add(c)
+
 	
 
 def Session(deckA, deckB):
