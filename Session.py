@@ -64,17 +64,21 @@ def Session(deckA, deckB):
 			return fdeck
 				
 	return None
+
+def Evaluate(curveA, curveB, runs):
+	totalAWins = 0
+	for i in range(runs):
+		deckA = curveA.GetDeck()
+		deckB = curveB.GetDeck()
+		winner = Session(deckA, deckB)
+		totalAWins += int(winner == deckA)
+
+	return totalAWins/runs
 	
 if __name__ == '__main__':
-	curveA = Curve([2, 7, 7, 5, 5, 3, 1]) 
-	curveB = Curve([2, 7, 7, 6, 4, 3, 1])
-	deckA = curveA.GetDeck()
-	deckB = curveB.GetDeck()
-	winner = Session(deckA, deckB)
-	if winner == deckA:
-		print(curveA)
-	else:
-		print(curveB)
+	print(Evaluate(Curve([2, 7, 7, 5, 5, 3, 1]), Curve([2, 7, 7, 6, 4, 3, 1]), 1000))
+
+	
 
 
 
