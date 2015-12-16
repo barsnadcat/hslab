@@ -15,7 +15,7 @@ def Turn(mana, myBoard, enemyBoard, hand, deck):
 		hand.Add(card)
 
 	myBoard.Attack(enemyBoard)	
-	
+
 	if enemyBoard.IsDead():
 		return
 
@@ -44,41 +44,37 @@ def Session(deckA, deckB):
 	sboard = Board()
 	
 	mana = 0
-	for i in range(40):
+	for i in range(50):
 		mana += 1
 		if mana > 10:
 			mana = 10
-		print("*** ", mana, " ***")
-
 			
 		Turn(mana, fboard, sboard, fhand, fdeck)
 
-		print(fhand)
-		print(fboard)
-		print(sboard)
-		print(shand)
-
-
 		if fboard.IsDead():
-			return 0
+			return sdeck
 		if sboard.IsDead():
-			return 1
-
-		print("--------")
+			return fdeck
 
 		Turn(mana, sboard, fboard, shand, sdeck)
 
-		print(fhand)
-		print(fboard)
-		print(sboard)
-		print(shand)
-
 		if fboard.IsDead():
-			return 0
+			return sdeck
 		if sboard.IsDead():
-			return 1
+			return fdeck
 				
 	return None
 	
 if __name__ == '__main__':
-	print(Session(Curve([2, 7, 7, 5, 5, 3, 1]).GetDeck(), Curve([2, 7, 7, 6, 4, 3, 1]).GetDeck()))
+	curveA = Curve([2, 7, 7, 5, 5, 3, 1]) 
+	curveB = Curve([2, 7, 7, 6, 4, 3, 1])
+	deckA = curveA.GetDeck()
+	deckB = curveB.GetDeck()
+	winner = Session(deckA, deckB)
+	if winner == deckA:
+		print(curveA)
+	else:
+		print(curveB)
+
+
+
