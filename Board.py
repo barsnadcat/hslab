@@ -16,9 +16,12 @@ class Board:
 		
 	def Attack(self, enemy):
 		#logic of attack
-		#1 do efficient trade - i.e spend your tempo to reduce more enemy tempo
-		#2 if enemy kills you faster, reduce it's tempo killing lower creatures with higer creatures
-		#3 to the face
+		# 0 if letal - go to face
+		# 1 trade
+		# 1 For each my creature, starting from creatures with lower attack:
+		# 1.1 Find strongest enemy creatures with not full healt to kill
+		# 1.2 Or find the strongest enemy creatures to kill without losing creature
+		# 1.3 if none - to the face
 
 		for creature in self.creatures:
 			enemy.health -= creature.attack
