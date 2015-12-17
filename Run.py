@@ -1,6 +1,6 @@
 from Genotype import Genotype
 from Curve import Curve
-from Evaluate import EvaluateN
+from Session import Evaluate
 from random import randint
 from random import random as rand
 
@@ -8,7 +8,6 @@ populationSize = 300
 evaluationIteration = 3000
 geneMax = 63
 cardCostMax = 7
-turns = 7
 tournamentSize = 4
 mutationChance = 0.05
 mutationDelta = 10
@@ -36,29 +35,25 @@ def Mutation(p):
 
 def Generation(population):
 	survivors = []
-	best = None
-	bestInGeneration = None
+	bestInTournament = None
+	bestInGeneration = population[0]
 	for i in range(len(population)):
 		p = population[i]
-		p.fitness = EvaluateN(p.GetCurve(), evaluationIteration, turns)
+		p.fitness = Evaluate(p.GetCurve(), bestInGeneration.GetCurve(), evaluationIteration)
 
-		if bestInGeneration:
-			if p.fitness > bestInGeneration.fitness:
-				bestInGeneration = p
-		else:
+		if p.fitness > bestInGeneration.fitness:
 			bestInGeneration = p
 
-
-		if best:
-			if p.fitness > best.fitness:
-				best = p
+		if bestInTournament:
+			if p.fitness > bestInTournament.fitness:
+				bestInTournament = p
 		else:
-			best = p
+			bestInTournament = p
 	
 		if i % tournamentSize == 0:
-			print('Selected ', best.fitness, best.GetCurve())
-			survivors.append(best)
-			best = None
+			print('Selected ', bestInTournament.fitness, bestInTournament.GetCurve())
+			survivors.append(bestInTournament)
+			bestInTournament = None
 	
 	print('Best in generation ', bestInGeneration.fitness, ' ', bestInGeneration.GetCurve())
 
