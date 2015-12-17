@@ -33,15 +33,18 @@ def Mutation(p):
 		p.genes[gene] = n
 	
 
-def Generation(population):
+def Generation(population, etalon):
 	survivors = []
 	bestInTournament = None
-	bestInGeneration = population[0]
+	bestInGeneration = None
 	for i in range(len(population)):
 		p = population[i]
-		p.fitness = Evaluate(p.GetCurve(), bestInGeneration.GetCurve(), evaluationIteration)
+		p.fitness = Evaluate(p.GetCurve(), etalon.GetCurve(), evaluationIteration)
 
-		if p.fitness > bestInGeneration.fitness:
+		if bestInGeneration:
+			if p.fitness > bestInGeneration.fitness:
+				bestInGeneration = p
+		else:
 			bestInGeneration = p
 
 		if bestInTournament:
@@ -51,7 +54,7 @@ def Generation(population):
 			bestInTournament = p
 	
 		if i % tournamentSize == 0:
-			print('Selected ', bestInTournament.fitness, bestInTournament.GetCurve())
+			print(int(i/populationSize * 100), ' Selected ', int(bestInTournament.fitness * 100), bestInTournament.GetCurve(), ' Etalon ', etalon.GetCurve())
 			survivors.append(bestInTournament)
 			bestInTournament = None
 	
@@ -71,11 +74,13 @@ def Generation(population):
 		child = Crossover(survivors[father], survivors[mother])
 		survivors.append(child)
 	
-	return survivors
+	return survivors, bestInGeneration
 	
 			
 population = [Genotype([randint(0, geneMax) for j in range(cardCostMax)]) for i in range(populationSize)]
+best = population[0]
 
 for i in range(generationsLimit):
-	population = Generation(population)
+	print('Generation ', i)
+	population, best = Generation(population, best)
 
