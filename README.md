@@ -53,3 +53,4 @@ Found:
 
 0 7 7 6 4 3 3
 
+Since there is 3 cards with cost 7, but there is quite some count of cards with stats 8\8 in real game - increase card cost up to 8.
