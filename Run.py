@@ -5,9 +5,9 @@ from random import randint
 from random import random as rand
 
 populationSize = 300
-evaluationIteration = 5000
+evaluationIteration = 10000
 geneMax = 63
-cardCostMax = 7
+cardCostMax = 8
 tournamentSize = 4
 mutationChance = 0.05
 mutationDelta = 10
