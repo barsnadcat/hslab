@@ -40,3 +40,17 @@ Stop assuming - play full game, use win\lose as survive criteria.
 Simpliphy game - no hero pover, only creatures, with straight stats mana = attack = health.
 
 But implement trade algorithm.
+
+One issue - to evaluate we need deck to play agains
+
+Perfect hand - is one way to do it, but i belive, i will be unbeatable.
+
+Previous generation best deck - current solution. Potentialy may stuck in local optimum.
+
+Found:
+
+1 2 3 4 5 6 7
+
+0 7 7 6 4 3 3
+
+Since there is 3 cards with cost 7, but there is quite some count of cards with stats 8\8 in real game - increase card cost up to 8.
