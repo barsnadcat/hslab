@@ -1,4 +1,5 @@
 from Curve import Curve
+from Deck import Deck
 from Hand import Hand
 from Board import Board
 from Creature import Creature
@@ -8,7 +9,7 @@ from random import randint
 def Turn(mana, myBoard, enemyBoard, hand, deck):
 	card = deck.TakeRandom() 
 	if card == None:
-		myBoard.Owerdraw()
+		myBoard.Overdraw()
 		if myBoard.IsDead():
 			return
 	else:
@@ -76,7 +77,30 @@ def Evaluate(curveA, curveB, runs):
 	return totalAWins/runs
 	
 if __name__ == '__main__':
-	print(Evaluate(Curve([2, 7, 7, 5, 5, 3, 1]), Curve([2, 7, 7, 6, 4, 3, 1]), 1000))
+
+	#Overdraw
+	myBoard = Board()
+	myBoard.health = 1
+	enemyBoard = Board()
+	deck = Deck([])
+	hand = Hand()	
+	Turn(10, myBoard, enemyBoard, hand, deck)
+	assert(myBoard.health == 0)
+	
+	
+	#Overpopulate board
+	myBoard = Board([Creature(1, 1), Creature(1, 1), Creature(1, 1), Creature(1, 1), Creature(1, 1), Creature(1, 1)])
+	enemyBoard = Board()
+	deck = Deck([5, 5, 5, 5, 5, 5])
+	hand = Hand()
+	hand.Add(4)
+	Turn(10, myBoard, enemyBoard, hand, deck)
+	assert(len(myBoard.creatures) == 7)
+	assert(len(hand.cards) == 1)
+	assert(hand.cards[0] == 4)
+	
+	
+	print(Evaluate(Curve([2, 7, 7, 5, 5, 3, 1]), Curve([2, 7, 7, 5, 5, 3, 1]), 5000))
 
 	
 

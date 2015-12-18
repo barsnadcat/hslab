@@ -5,7 +5,7 @@ from random import randint
 from random import random as rand
 
 populationSize = 300
-evaluationIteration = 3000
+evaluationIteration = 5000
 geneMax = 63
 cardCostMax = 7
 tournamentSize = 4

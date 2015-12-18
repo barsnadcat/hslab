@@ -59,9 +59,9 @@ class Board:
 	def IsDead(self):
 		return self.health <= 0
 		
-	def Overdraw():
+	def Overdraw(self):
 		self.overdraw += 1
-		self.heath -= self.overdraw
+		self.health -= self.overdraw
 		
 
 def SortedCreatures(creatures, r):
