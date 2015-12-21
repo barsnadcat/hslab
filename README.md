@@ -90,5 +90,5 @@ and
 
 0 6 7 6 5 4 2 0
 
-Yes. There is a problem with previous generation as benchmark - process starts to wobble around optimum - random errors prevenst from futher increase in accuracy
+Yes. There is a problem with previous generation as benchmark - process starts to wobble around optimum - random errors prevenst from futher increase in accuracy. Fighting each other should reduce wobbling a lot.
 
