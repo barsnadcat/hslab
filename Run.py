@@ -3,15 +3,16 @@ from Curve import Curve
 from Session import Evaluate
 from random import randint
 from random import random as rand
+from math import sqrt
 
-populationSize = 300
-evaluationIteration = 10000
+populationSize = 500
+evaluationIteration = 1000
 geneMax = 63
 cardCostMax = 8
-tournamentSize = 4
+tournamentSize = 3
 mutationChance = 0.05
 mutationDelta = 10
-generationsLimit = 100
+generationsLimit = 1000
 
 
 def Crossover(father, mother):
@@ -32,33 +33,43 @@ def Mutation(p):
 		n = max(min(delta + p.genes[gene], geneMax), 0)
 		p.genes[gene] = n
 	
+def Pairwise(iterable):
+	a = iter(iterable)
+	return zip(a, a)
 
-def Generation(population, etalon):
+def Generation(population):
 	survivors = []
-	bestInTournament = None
-	bestInGeneration = None
-	for i in range(len(population)):
-		p = population[i]
-		p.fitness = Evaluate(p.GetCurve(), etalon.GetCurve(), evaluationIteration)
-
-		if bestInGeneration:
-			if p.fitness > bestInGeneration.fitness:
-				bestInGeneration = p
-		else:
-			bestInGeneration = p
-
-		if bestInTournament:
-			if p.fitness > bestInTournament.fitness:
-				bestInTournament = p
-		else:
-			bestInTournament = p
 	
-		if i % tournamentSize == 0:
-			print(int(i/populationSize * 100), ' Selected ', int(bestInTournament.fitness * 100), bestInTournament.GetCurve(), ' Etalon ', etalon.GetCurve())
-			survivors.append(bestInTournament)
-			bestInTournament = None
+	averageGenome = [0 for i in range(cardCostMax)]
+	for x, y in Pairwise(population):		
+		fitness = Evaluate(x.GetCurve(), y.GetCurve(), evaluationIteration)
+		
+		print(int(fitness * 100), x.GetCurve(), ' vs ', y.GetCurve())
+		
+		bestInTournament = None
+		if fitness > 0.5:
+			bestInTournament = x
+		else:
+			bestInTournament = y
+
+		survivors.append(bestInTournament)
+		for i in range(cardCostMax):
+			averageGenome[i] += bestInTournament.genes[i]
 	
-	print('Best in generation ', bestInGeneration.fitness, ' ', bestInGeneration.GetCurve())
+	print('Average curve ', Genotype(averageGenome).GetCurve())
+	for i in range(cardCostMax):
+		sum = 0;
+		for s in survivors:
+			sum += s.genes[i]
+		mean = sum / populationSize / 2
+		variance = 0
+		for s in survivors:
+			v = s.genes[i] - mean
+			variance += v * v
+		stdev = sqrt(variance / populationSize / 2)
+		
+		print(i, ": ", mean, "(+/- ", stdev, ")")
+			
 
 	survived = len(survivors)
 	
@@ -66,7 +77,7 @@ def Generation(population, etalon):
 	for p in survivors:
 		Mutation(p)
 	
-	died = len(population) - survived
+	died = populationSize - survived
 	
 	for i in range(died):
 		father = randint(0, survived - 1)
@@ -74,13 +85,13 @@ def Generation(population, etalon):
 		child = Crossover(survivors[father], survivors[mother])
 		survivors.append(child)
 	
-	return survivors, bestInGeneration
+	return survivors
 	
 			
 population = [Genotype([randint(0, geneMax) for j in range(cardCostMax)]) for i in range(populationSize)]
-best = population[0]
+
 
 for i in range(generationsLimit):
 	print('Generation ', i)
-	population, best = Generation(population, best)
+	population = Generation(population)
 
