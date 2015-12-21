@@ -92,3 +92,7 @@ and
 
 Yes. There is a problem with previous generation as benchmark - process starts to wobble around optimum - random errors prevenst from futher increase in accuracy. Fighting each other should reduce wobbling a lot.
 
+New iteration - fight each other, so we kill in each generation only halp instead of 75%. Calculate average survived genome instead of selecting best in generation.
+
+To see if computation will not produce anything useful - calculate stdev for each gene value, having it close to mutation on all genes means computation is done.
+
