@@ -3,19 +3,19 @@ First thing first, here it is:
 
 Now when wannaby legends and newbies have left, lets talk.
 
-Well, to be honest, I have failed. There is low mana curve - when you run out of cards before your opponent. There is high mana curve when you have nothing to play on early turns. There is good mana curve when you mostly keep your hand with more or same count of cards, and your oponent does not have board advantage. But there is no perfect mana curve. Card quality and synegy are more important than mana curve.
-
-Now wneh pro players have left with "I know" tought, let me tell why.
-
-Because Hearthstone is a ****** random game. All those ranks up to legend? They do not show how 
-
-
-In search of perfect manacurve.
 Hearthstone tempo\arena prefect mana curve.
-
 Mana curve is function - card count vs card cost. 
-
 With additional limit - 30 cards.
+
+Well, to be honest, I have failed. There is low mana curve - when you run out of cards before your opponent. There is high mana curve when you have nothing to play on early turns. There is good mana curve when you mostly keep your hand with more or same count of cards, and your oponent does not have board advantage. But there is no perfect mana curve. Card quality and synegy are more important in deck composition than mana curve.
+
+Now wneh pro players have left with "I know", let me tell why.
+
+Because Hearthstone is a ****** random game. All those ranks up to legend? They do not show how your skill, nor your deck quality. The just show how many times you have played in ranked, thanks to bonus star effect (http://hearthstone.gamepedia.com/Ranked#Notes).
+
+Now when offended teenagers have left to rebuild their self esteem, let me answer the obivous question, that all smart people had in their mind after reading the headline:
+"How did he defined the perfect mana curve?"
+
 
 This can be calculated using probability theory, and I've found some one who done it in excel.
 
