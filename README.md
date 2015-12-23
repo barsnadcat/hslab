@@ -1,4 +1,14 @@
 # hslab
+First thing first, here it is:
+
+Now when wannaby legends and newbies have left, lets talk.
+
+Well, to be honest, I have failed. There is low mana curve - when you run out of cards before your opponent. There is high mana curve when you have nothing to play on early turns. There is good mana curve when you mostly keep your hand with more or same count of cards, and your oponent does not have board advantage. But there is no perfect mana curve. Card quality and synegy are more important than mana curve.
+
+Now wneh pro players have left with "I know" tought, let me tell why.
+
+Because Hearthstone is a ****** random game. All those ranks up to legend? They do not show how 
+
 
 In search of perfect manacurve.
 Hearthstone tempo\arena prefect mana curve.
