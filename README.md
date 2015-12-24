@@ -108,4 +108,4 @@ To see if computation will not produce anything useful - calculate stdev for eac
 
 Apparently low accuracy of comparsion can not push curve futher 0676542, and stdev values stay the same across generations.
 
-Seeding population with previous best curves had an unexpected turn: new strange looking curve 20976510
+Seeding population with previous best curves had an unexpected turn: new strange looking curve 20977500
