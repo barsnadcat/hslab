@@ -108,4 +108,7 @@ To see if computation will not produce anything useful - calculate stdev for eac
 
 Apparently low accuracy of comparsion can not push curve futher 0676542, and stdev values stay the same across generations.
 
-Seeding population with previous best curves had an unexpected turn: new strange looking curve 20977500
+Seeding population with previous best curves and increasing accuracy till 20000 had an unexpected turn: new strange looking curve 20977500
+
+Trying seeding again but with a curve values more fitting random generated values. 
+I suspect low walues of previously seeded curves prevents mutation from working. It could be solved by gray encoding and bit level mutations.
