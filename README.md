@@ -107,3 +107,5 @@ New iteration - fight each other, so we kill in each generation only halp instea
 To see if computation will not produce anything useful - calculate stdev for each gene value, having it close to mutation on all genes means computation is done.
 
 Apparently low accuracy of comparsion can not push curve futher 0676542, and stdev values stay the same across generations.
+
+Seeding population with previous best curves had an unexpected turn: new strange looking curve 20976510
