@@ -112,3 +112,5 @@ Seeding population with previous best curves and increasing accuracy till 20000 
 
 Trying seeding again but with a curve values more fitting random generated values. 
 I suspect low walues of previously seeded curves prevents mutation from working. It could be solved by gray encoding and bit level mutations.
+
+Better seeding and longer run (200 generations) resulted in new curve 23776410
