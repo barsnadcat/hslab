@@ -58,6 +58,7 @@ def Generation(population):
 	
 		if i % tournamentSize == 0:
 			print(int(i/populationSize * 100), ' Selected ', int(bestInTournament.fitness * 100), bestInTournament.GetCurve())
+			sys.stdout.flush()
 			survivors.append(bestInTournament)
 			for i in range(cardCostMax):
 				averageGenome[i] += bestInTournament.genes[i]
