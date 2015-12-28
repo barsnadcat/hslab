@@ -100,7 +100,10 @@ if __name__ == '__main__':
 	assert(hand.cards[0] == 4)
 	
 	
-	print(Evaluate(Curve([2, 7, 7, 5, 5, 3, 1]), Curve([2, 7, 7, 5, 5, 3, 1]), 5000))
+	print(Evaluate(Curve([2, 3, 7, 7, 6, 4, 1]), Curve([2, 7, 7, 6, 4, 3, 1]), 50000))	
+	print(Evaluate(Curve([2, 3, 7, 7, 6, 4, 1]), Curve([0, 6, 7, 6, 5, 4, 2]), 50000))	
+	print(Evaluate(Curve([2, 3, 7, 7, 6, 4, 1]), Curve([2, 0, 9, 7, 7, 5, 0]), 50000))	
+	
 
 	
 

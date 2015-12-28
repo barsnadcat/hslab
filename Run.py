@@ -4,12 +4,12 @@ from Session import Evaluate
 from random import randint
 from random import random as rand
 from math import sqrt
+import sys
 
-populationSize = 500
-evaluationIteration = 1000
+populationSize = 200
+evaluationIteration = 10000
 geneMax = 63
 cardCostMax = 8
-tournamentSize = 3
 mutationChance = 0.05
 mutationDelta = 10
 generationsLimit = 1000
@@ -45,6 +45,7 @@ def Generation(population):
 		fitness = Evaluate(x.GetCurve(), y.GetCurve(), evaluationIteration)
 		
 		print(int(fitness * 100), x.GetCurve(), ' vs ', y.GetCurve())
+		sys.stdout.flush()
 		
 		bestInTournament = None
 		if fitness > 0.5:
@@ -69,7 +70,8 @@ def Generation(population):
 		stdev = sqrt(variance / populationSize / 2)
 		
 		print(i, ": ", mean, "(+/- ", stdev, ")")
-			
+	sys.stdout.flush()
+		
 
 	survived = len(survivors)
 	
@@ -89,6 +91,19 @@ def Generation(population):
 	
 			
 population = [Genotype([randint(0, geneMax) for j in range(cardCostMax)]) for i in range(populationSize)]
+
+for i in range(10):
+	population[randint(0, populationSize-1)].genes = [0, 6 * 4, 7 * 4, 6 * 4, 5 * 4, 4 * 4, 2 * 4, 0]
+
+for i in range(10):
+	population[randint(0, populationSize-1)].genes = [0, 7 * 4, 7 * 4, 5 * 4, 5 * 4, 4 * 4, 2 * 4, 0]
+
+for i in range(10):
+	population[randint(0, populationSize-1)].genes = [0, 7 * 4, 7 * 4, 6 * 4, 4 * 4, 4 * 4, 2 * 4, 0]
+	
+for i in range(10):
+	population[randint(0, populationSize-1)].genes = [2 * 4, 0, 9 * 4, 7 * 4, 7 * 4, 5 * 4, 0, 0]
+
 
 
 for i in range(generationsLimit):
