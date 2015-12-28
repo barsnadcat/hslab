@@ -17,6 +17,7 @@ Now when offended teenagers have left to rebuild their self esteem, let me answe
 "How did he defined the perfect mana curve?"
 
 
+
 This can be calculated using probability theory, and I've found some one who done it in excel.
 
 I decide to use genetic algorithm to do this. This is basically evristic guided brutforce soulution of optimization problem.
@@ -115,4 +116,9 @@ I suspect low walues of previously seeded curves prevents mutation from working.
 
 Better seeding and longer run (200 generations) resulted in new curve 23776410. After checking this curve agains previous one, it is obvious that soulution is drifting, and will unlikly find optimum.
 
+New iteration.
+
+Playing against another deck as evaluation function does not leed us to optimum.
+Let's play against perfect hand (hand that plays 1, 2, 3, 4, 5, 6, 7, 8, 4 + 5, 5 + 5).
+And fitness will be total temopo.
 
