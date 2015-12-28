@@ -5,12 +5,17 @@ class Board:
 		self.creatures = c
 		self.health = 30
 		self.overdraw = 0
+		self.totalTempo = 0
 
 	def __str__(self):
 		crt = " "
 		for c in self.creatures:
 			crt += str(c) + " "
 		return str(self.health) + crt
+		
+	def CalcTotalTempo(self):
+		for c in self.creatures:
+			self.totalTempo += c.attack
 
 		
 	def AddCreature(self, c):

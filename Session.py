@@ -1,5 +1,6 @@
 from Curve import Curve
 from Deck import Deck
+from PerfectDeck import PerfectDeck
 from Hand import Hand
 from Board import Board
 from Creature import Creature
@@ -7,7 +8,13 @@ from random import randint
 
 
 def Turn(mana, myBoard, enemyBoard, hand, deck):
-	card = deck.TakeRandom() 
+	#print('-----', mana, '-----')
+	#print(enemyBoard)
+	#print(myBoard)
+	#print(hand)
+	
+	card = deck.TakeRandom()
+	#print("Take card ", card)
 	if card == None:
 		myBoard.Overdraw()
 		if myBoard.IsDead():
@@ -15,20 +22,26 @@ def Turn(mana, myBoard, enemyBoard, hand, deck):
 	else:
 		hand.Add(card)
 
-	myBoard.Attack(enemyBoard)	
+	myBoard.Attack(enemyBoard)
 
 	if enemyBoard.IsDead():
 		return
-
+	
 	cards = hand.Play(mana)
+	#print ("Play cards ", cards)
 
 	#Creatures my not fit into the board, play heaviest first
 	cards.sort(reverse=True)
 	for c in cards:
 		if not myBoard.AddCreature(Creature(c, c)):
 			hand.Add(c)
+			
+	myBoard.CalcTotalTempo()
 
-	
+	#print("***Final state***")
+	#print(enemyBoard)
+	#print(myBoard)
+	#print(hand)
 
 def Session(deckA, deckB):
 	fdeck = deckA
@@ -53,16 +66,16 @@ def Session(deckA, deckB):
 		Turn(mana, fboard, sboard, fhand, fdeck)
 
 		if fboard.IsDead():
-			return sdeck
+			return sdeck, sboard.totalTempo
 		if sboard.IsDead():
-			return fdeck
+			return fdeck, fboard.totalTempo
 
 		Turn(mana, sboard, fboard, shand, sdeck)
 
 		if fboard.IsDead():
-			return sdeck
+			return sdeck, sboard.totalTempo
 		if sboard.IsDead():
-			return fdeck
+			return fdeck, fboard.totalTempo
 				
 	return None
 
@@ -75,10 +88,21 @@ def Evaluate(curveA, curveB, runs):
 		totalAWins += int(winner == deckA)
 
 	return totalAWins/runs
+
+def Evaluate2(curve, runs):
+	totalFitness = 0
+	for i in range(runs):
+		deckA = curve.GetDeck()
+		deckB = PerfectDeck()
+		winner, totalTempo = Session(deckA, deckB)
+		totalFitness += totalTempo
+
+	return totalFitness/runs
+
 	
 if __name__ == '__main__':
 
-	#Overdraw
+	print("Overdraw")
 	myBoard = Board()
 	myBoard.health = 1
 	enemyBoard = Board()
@@ -88,7 +112,7 @@ if __name__ == '__main__':
 	assert(myBoard.health == 0)
 	
 	
-	#Overpopulate board
+	print("Overpopulate board")
 	myBoard = Board([Creature(1, 1), Creature(1, 1), Creature(1, 1), Creature(1, 1), Creature(1, 1), Creature(1, 1)])
 	enemyBoard = Board()
 	deck = Deck([5, 5, 5, 5, 5, 5])
@@ -99,10 +123,13 @@ if __name__ == '__main__':
 	assert(len(hand.cards) == 1)
 	assert(hand.cards[0] == 4)
 	
-	
-	print(Evaluate(Curve([2, 3, 7, 7, 6, 4, 1]), Curve([2, 7, 7, 6, 4, 3, 1]), 50000))	
-	print(Evaluate(Curve([2, 3, 7, 7, 6, 4, 1]), Curve([0, 6, 7, 6, 5, 4, 2]), 50000))	
-	print(Evaluate(Curve([2, 3, 7, 7, 6, 4, 1]), Curve([2, 0, 9, 7, 7, 5, 0]), 50000))	
+	print("Perfect test")
+
+	print(Evaluate2(Curve([2, 0, 9, 7, 7, 5, 0]), 10000))
+	print(Evaluate2(Curve([2, 3, 7, 7, 6, 4, 1]), 10000))
+	print(Evaluate2(Curve([0, 6, 7, 6, 5, 4, 2]), 10000))
+	print(Evaluate2(Curve([30, 0, 0, 0, 0, 0, 0]), 10000))
+	print(Evaluate2(Curve([0, 0, 0, 0, 0, 0, 0, 30]), 10000))
 	
 
 	

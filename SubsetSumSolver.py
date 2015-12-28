@@ -31,7 +31,8 @@ def ApproximateSubsetSum(x_list, s):
         for y, y_list in S:
             T.append((x + y, y_list + [x]))
         U = T + S
-        U = sort_by_col(U, 0)
+        #U = sort_by_col(U, 0)
+        U.sort(key=operator.itemgetter(0))
         y, y_list = U[0]
         S = [(y, y_list)]
 

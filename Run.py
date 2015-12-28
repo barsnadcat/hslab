@@ -1,15 +1,16 @@
 from Genotype import Genotype
 from Curve import Curve
-from Session import Evaluate
+from Session import Evaluate2
 from random import randint
 from random import random as rand
 from math import sqrt
 import sys
 
 populationSize = 200
-evaluationIteration = 10000
+evaluationIteration = 20000
 geneMax = 63
 cardCostMax = 8
+tournamentSize = 4
 mutationChance = 0.05
 mutationDelta = 10
 generationsLimit = 1000
@@ -32,31 +33,37 @@ def Mutation(p):
 		delta = randint(-mutationDelta, mutationDelta)
 		n = max(min(delta + p.genes[gene], geneMax), 0)
 		p.genes[gene] = n
-	
-def Pairwise(iterable):
-	a = iter(iterable)
-	return zip(a, a)
 
 def Generation(population):
 	survivors = []
 	
 	averageGenome = [0 for i in range(cardCostMax)]
-	for x, y in Pairwise(population):		
-		fitness = Evaluate(x.GetCurve(), y.GetCurve(), evaluationIteration)
+	bestInTournament = None
+	bestInGeneration = None
+	for i in range(len(population)):
+		p = population[i]
+		p.fitness = Evaluate2(p.GetCurve(), evaluationIteration)
 		
-		print(int(fitness * 100), x.GetCurve(), ' vs ', y.GetCurve())
-		sys.stdout.flush()
-		
-		bestInTournament = None
-		if fitness > 0.5:
-			bestInTournament = x
+		if bestInGeneration:
+			if p.fitness > bestInGeneration.fitness:
+				bestInGeneration = p
 		else:
-			bestInTournament = y
+			bestInGeneration = p
 
-		survivors.append(bestInTournament)
-		for i in range(cardCostMax):
-			averageGenome[i] += bestInTournament.genes[i]
+		if bestInTournament:
+			if p.fitness > bestInTournament.fitness:
+				bestInTournament = p
+		else:
+			bestInTournament = p
 	
+		if i % tournamentSize == 0:
+			print(int(i/populationSize * 100), ' Selected ', int(bestInTournament.fitness * 100), bestInTournament.GetCurve())
+			survivors.append(bestInTournament)
+			for i in range(cardCostMax):
+				averageGenome[i] += bestInTournament.genes[i]
+			bestInTournament = None
+			
+	print('Best in generation ', bestInGeneration.fitness, ' ', bestInGeneration.GetCurve())
 	print('Average curve ', Genotype(averageGenome).GetCurve())
 	for i in range(cardCostMax):
 		sum = 0;
