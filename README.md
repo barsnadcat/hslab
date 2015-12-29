@@ -123,4 +123,4 @@ Let's play against perfect hand (hand that plays 1, 2, 3, 4, 5, 6, 7, 8, 4 + 5, 
 And fitness will be total temopo.
 
 Result 7, 11, 11, 0, 0, 0, 1, 0, clearly my evaluation function is not what I search for.
-Maybe I should limit to 1 card per turn again.
+Maybe I should limit to 1 card per turn again. Result = 08866200
