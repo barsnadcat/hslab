@@ -1,4 +1,5 @@
-from Genotype import Genotype
+from Genotype import Genotype, RandomGenotype, geneMax, cardCostMax
+
 from Curve import Curve
 from Session import Evaluate2
 from random import randint
@@ -7,9 +8,7 @@ from math import sqrt
 import sys
 
 populationSize = 200
-evaluationIteration = 20000
-geneMax = 63
-cardCostMax = 8
+evaluationIteration = 100
 tournamentSize = 4
 mutationChance = 0.05
 mutationDelta = 10
@@ -98,7 +97,7 @@ def Generation(population):
 	return survivors
 	
 			
-population = [Genotype([randint(0, geneMax) for j in range(cardCostMax)]) for i in range(populationSize)]
+population = [RandomGenotype() for i in range(populationSize)]
 
 for i in range(10):
 	population[randint(0, populationSize-1)].genes = [0, 6 * 4, 7 * 4, 6 * 4, 5 * 4, 4 * 4, 2 * 4, 0]

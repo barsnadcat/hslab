@@ -1,10 +1,12 @@
 from Curve import Curve
 from Deck import Deck
 from PerfectDeck import PerfectDeck
+from RandomDeck import RandomDeck
 from Hand import Hand
 from Board import Board
 from Creature import Creature
 from random import randint
+
 
 
 def Turn(mana, myBoard, enemyBoard, hand, deck):
@@ -90,14 +92,14 @@ def Evaluate(curveA, curveB, runs):
 	return totalAWins/runs
 
 def Evaluate2(curve, runs):
-	totalFitness = 0
+	totalAWins = 0
 	for i in range(runs):
 		deckA = curve.GetDeck()
-		deckB = PerfectDeck()
+		deckB = RandomDeck()
 		winner, totalTempo = Session(deckA, deckB)
-		totalFitness += totalTempo
+		totalAWins += int(winner == deckA)
 
-	return totalFitness/runs
+	return totalAWins/runs
 
 	
 if __name__ == '__main__':
@@ -123,7 +125,7 @@ if __name__ == '__main__':
 	assert(len(hand.cards) == 1)
 	assert(hand.cards[0] == 4)
 	
-	print("Perfect test")
+	print("Evaluate2 test")
 
 	print(Evaluate2(Curve([2, 0, 9, 7, 7, 5, 0]), 10000))
 	print(Evaluate2(Curve([2, 3, 7, 7, 6, 4, 1]), 10000))

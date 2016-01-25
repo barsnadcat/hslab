@@ -2,6 +2,10 @@ from random import randint
 from Deck import Deck
 from Curve import Curve
 
+
+geneMax = 63
+cardCostMax = 8
+
 class Genotype:
 	def __init__(self, g):
 		self.genes = g
@@ -26,6 +30,8 @@ class Genotype:
 				
 		return Curve(normalized)
 		
+def RandomGenotype():
+	return Genotype([randint(0, geneMax) for j in range(cardCostMax)])
 		
 if __name__ == '__main__':
 
