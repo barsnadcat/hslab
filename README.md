@@ -126,3 +126,5 @@ Result 7, 11, 11, 0, 0, 0, 1, 0, clearly my evaluation function is not what I se
 Maybe I should limit to 1 card per turn again. Result = 08866200
 
 Perfect hand with total tempo evaluation seems to be step back. Instead play agains random deck and again - use winratio as fitness function. Allow playing multiple cards per turn. Result = 11,7,4,3,3,2
+
+What else can be improved? Trading algorithm - you probably should trade equal minions if you are behaind in tempo. Muligan algorithm - you probably should keep one 3 if you are going second.
