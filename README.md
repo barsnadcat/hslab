@@ -133,4 +133,4 @@ With fixes to trade algorithm - trade equaly to prevent next turn lethal, and 20
 
 0,10,7,6,5,2
 
-After analysing this deck session - it is obvious that it works by filling board with lots of minions. With is not viable in real life, because of mass clear spels.
+After analysing this deck session - it is obvious that it works by filling board with lots of minions. This is not viable in real life, because of mass clear spels.
