@@ -125,6 +125,10 @@ And fitness will be total temopo.
 Result 7, 11, 11, 0, 0, 0, 1, 0, clearly my evaluation function is not what I search for.
 Maybe I should limit to 1 card per turn again. Result = 08866200
 
-Perfect hand with total tempo evaluation seems to be step back. Instead play agains random deck and again - use winratio as fitness function. Allow playing multiple cards per turn. Result = 11,7,4,3,3,2
+Perfect hand with total tempo evaluation seems to be step back. Instead play agains random deck and again - use winratio as fitness function. Allow playing multiple cards per turn. Result = 0,11,7,4,3,3,2
 
 What else can be improved? Trading algorithm - you probably should trade equal minions if you are behaind in tempo. Muligan algorithm - you probably should keep one 3 if you are going second.
+
+With fixes to trade algorithm - trade equaly to prevent next turn lethal, and 20000 runs new result is
+
+0,10,7,6,5,2
